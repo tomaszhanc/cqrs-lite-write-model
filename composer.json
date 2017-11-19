@@ -1,0 +1,26 @@
+{
+    "name": "tomaszhanc/cqrs-lite-write-model",
+    "keywords": ["write model", "cqrs lite", "cqrs"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Tomasz Hanc"
+        }
+    ],
+    "require": {
+        "php":  ">=7.1"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^6.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "WriteModel\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "WriteModel\\Tests\\": "tests/"
+        }
+    }
+}
