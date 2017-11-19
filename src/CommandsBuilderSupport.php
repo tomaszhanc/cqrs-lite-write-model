@@ -6,7 +6,7 @@ namespace WriteModel;
 trait CommandsBuilderSupport
 {
     /** @var CommandsBuilder */
-    private $commandsBuilder;
+    protected $commandsBuilder;
 
     protected function addCommandFor(...$keys): CommandFactory
     {
