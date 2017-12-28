@@ -23,6 +23,10 @@ class CommandFactory
 
     public function shouldBeCreated(array $data): bool
     {
+        if (empty($this->fields)) {
+            return true;
+        }
+
         // command should be created if there is data for at least one command's field
         $intersection = array_intersect(array_keys($data), $this->fields);
         return count($intersection) > 0;

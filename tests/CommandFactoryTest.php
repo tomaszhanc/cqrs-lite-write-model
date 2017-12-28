@@ -26,6 +26,15 @@ class CommandFactoryTest extends TestCase
     /**
      * @test
      */
+    public function should_create_a_command_always_when_fields_are_not_provided()
+    {
+        $factory = new CommandFactory();
+        $this->assertTrue($factory->shouldBeCreated(['name' => 'John', 'description' => '']));
+    }
+
+    /**
+     * @test
+     */
     public function should_create_a_command()
     {
         $this->givenThatFactoryIsProvided();
