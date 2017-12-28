@@ -30,6 +30,11 @@ class CommandFactoryTest extends TestCase
     {
         $factory = new CommandFactory();
         $this->assertTrue($factory->shouldBeCreated(['name' => 'John', 'description' => '']));
+
+        $factory->createBy([$this->factoryMethod->reveal(), 'create']);
+        $factory->create(['name' => 'John', 'description' => '']);
+
+        $this->factoryMethod->create(['name' => 'John', 'description' => ''])->shouldHaveBeenCalled();
     }
 
     /**

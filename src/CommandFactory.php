@@ -38,17 +38,32 @@ class CommandFactory
             throw LogicException::factoryMethodIsNotProvided($this->fields);
         }
 
-        // use only data indicated in $fields array
-        $data = array_filter($data, function ($key) { return in_array($key, $this->fields); }, ARRAY_FILTER_USE_KEY);
-
-        // flip $fields to have it's value as keys in $defaults array and reset all values to null
-        $defaults = array_map(function () { return null; }, array_flip($this->fields));
-        $command = call_user_func($this->factoryMethod, array_merge($defaults, $data));
+        $values = $this->resolveValues($data);
+        $command = call_user_func($this->factoryMethod, $values);
 
         if (!is_object($command)) {
             throw LogicException::commandIsNotAnObject();
         }
 
         return $command;
+    }
+
+    private function resolveValues(array $data): array
+    {
+        if (empty($this->fields)) {
+            return $data;
+        }
+
+        // use only data indicated in $fields array
+        $data = array_filter($data, function ($key) {
+            return in_array($key, $this->fields);
+        }, ARRAY_FILTER_USE_KEY);
+
+        // flip $fields to have it's value as keys in $defaults array and reset all values to null
+        $defaults = array_map(function () {
+            return null;
+        }, array_flip($this->fields));
+
+        return array_merge($defaults, $data);
     }
 }
